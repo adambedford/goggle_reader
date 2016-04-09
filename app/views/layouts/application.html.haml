@@ -2,9 +2,28 @@
 %html
   %head
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
-    %title GoggleReader
-    = stylesheet_link_tag    'application', media: 'all'
-    = javascript_include_tag 'application'
+
+    %link{:href => "https://fonts.googleapis.com/icon?family=Material+Icons", :rel => "stylesheet"}
+
+    %title
+      - if content_for?(:title)
+        = yield(:title)
+      - else
+        Goggle Reader
+
+    = stylesheet_link_tag    "application", media: "all"
+
+    = javascript_include_tag "application"
+
     = csrf_meta_tags
+
+    %meta{:content => "width=device-width", :name => "viewport"}/
+
   %body
-    = yield
+    = render "layouts/messages"
+
+    = render "layouts/navigation"
+
+    .container
+      .row
+        = yield
