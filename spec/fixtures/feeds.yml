@@ -1,0 +1,2 @@
+bbc_world_feed:
+  url: http://feeds.bbci.co.uk/news/world/rss.xml?edition=uk
