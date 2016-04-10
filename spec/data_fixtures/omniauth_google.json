@@ -1,0 +1,46 @@
+{
+  "provider":"google",
+  "uid":"USER-ID-12345",
+  "info":{
+    "name":"Adam Bedford",
+    "email":"adam@email.com",
+    "first_name":"Adam",
+    "last_name":"Bedford",
+    "image":"https://lh5.googleusercontent.com/-JK9tAv0VJ6E/AAAAAAAAAAI/AAAAAAAAAC0/W3eoGaRKNOc/photo.jpg",
+    "urls":{
+      "Google":"https://plus.google.com/USER-ID-12345"
+    }
+  },
+  "credentials":{
+    "token":"ya29..wALUY9FyBPHDLBe0BkFfxxNuBYJKp1Tf4ocn9SGkSz51-ycjDU2pJzbKkzA2wM1UPA",
+    "expires_at":1460316652,
+    "expires":true
+  },
+  "extra":{
+    "id_token":"eyJhbGciOiJSUzI1NiIsImtpZCI6IjRlMzc4OGM0ZTZmODU1YjgyMGQ2MjRiYTU5NzkwMDM1ZjRmNDM1NmUifQ.eyJpc3MiOiJhY2NvdW50cy5nb29nbGUuY29tIiwiYXRfaGFzaCI6IkdZbE9QcTFpOVlnWmEtVG1tczZIMHciLCJhdWQiOiI1ODAzOTQ1MzgwNTItNm0yaDU3cHRlZjRwbHZtZDRmODYwM2tvaGlwYzFtaGwuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJzdWIiOiIxMTIzMjg5NTIzNzgzNjk1NTY3NTMiLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiYXpwIjoiNTgwMzk0NTM4MDUyLTZtMmg1N3B0ZWY0cGx2bWQ0Zjg2MDNrb2hpcGMxbWhsLmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwiZW1haWwiOiJhZGFtYmVkZm9yZDkxQGdtYWlsLmNvbSIsImlhdCI6MTQ2MDMxMzA1MiwiZXhwIjoxNDYwMzE2NjUyfQ.XKHF6VyzYSOdo0IpCL5rsEqkx5uFNa_28i0ZOqQ-gPq0zr6DPVmkJH79BFW73QWE_ZPDbaZfL-gQUXZfC1BNKIvu2NQ4fV6PJyK-hTJydaGYZc_XoVd9kEcn4m5vDzsoTzo-MheYDHzojtpzdRqTAQGROg54vnVSuuzsJ6llyaxyPS-L6cLvUOqNAe4kHgcLWl3DgHKfTSRNNKQLRoVPqvM2Q2Yr6Kqv4KjeJ5bWcsGyyvIVktHJCPuiMXM6hFH2BZuZ1t6cknTmulr2y7gci6KV4mcxur5BPw3NVWuwN-EG4tNqazOWQYFyvX3PfcLSjl6rVfkWOIpTZ-z-KysG1w",
+    "id_info":{
+      "iss":"accounts.google.com",
+      "at_hash":"GYlOPq1i9YgZa-Tmms6H0w",
+      "aud":"580394538052-6m2h57ptef4plvmd4f8603kohipc1mhl.apps.googleusercontent.com",
+      "sub":"USER-ID-12345",
+      "email_verified":true,
+      "azp":"580394538052-6m2h57ptef4plvmd4f8603kohipc1mhl.apps.googleusercontent.com",
+      "email":"adam@email.com",
+      "iat":1460313052,
+      "exp":1460316652
+    },
+    "raw_info":{
+      "kind":"plus#personOpenIdConnect",
+      "gender":"male",
+      "sub":"USER-ID-12345",
+      "name":"Adam Bedford",
+      "given_name":"Adam",
+      "family_name":"Bedford",
+      "profile":"https://plus.google.com/USER-ID-12345",
+      "picture":"https://lh5.googleusercontent.com/-JK9tAv0VJ6E/AAAAAAAAAAI/AAAAAAAAAC0/W3eoGaRKNOc/photo.jpg?sz=50",
+      "email":"adam@email.com",
+      "email_verified":"true",
+      "locale":"en"
+    }
+  }
+}
