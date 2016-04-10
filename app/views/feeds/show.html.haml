@@ -1,12 +1,16 @@
-%h4= @feed.name
+.col.s12.m4.l3
+  = render 'list'
 
-- @articles.each do |article|
-  .card
-    .card-content
-      %span.card-title
-        = article.title
+.col.s12.m8.l9
+  %h4= @feed.name
 
-      %p= article.summary.html_safe
+  - @articles.each do |article|
+    .card
+      .card-content
+        %span.card-title
+          = article.title
 
-    .card-action
-      = link_to "Read More", article.url, target: "_blank"
+        %p= article.summary.html_safe
+
+      .card-action
+        = link_to "Read More", article.url, target: "_blank"

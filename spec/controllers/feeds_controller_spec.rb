@@ -75,6 +75,11 @@ RSpec.describe FeedsController, type: :controller do
     let(:feed) { create(:feed) }
     let(:articles) {  }
 
+    it "loads all feeds" do
+      do_request(id: feed.id)
+      expect(assigns(:feeds)).to be_a(ActiveRecord::Relation)
+    end
+
     it "finds the correct instance of Feed" do
       do_request(id: feed.id)
       expect(assigns(:feed)).to eq feed

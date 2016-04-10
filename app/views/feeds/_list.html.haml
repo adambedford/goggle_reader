@@ -1,0 +1,10 @@
+- if @feeds.any?
+  .collection
+    - @feeds.each do |feed|
+      = link_to feed.name, feed, class: "collection-item"
+
+- else
+  .card-panel
+    %span
+      You have not added any feeds. Add one
+      = link_to "here", new_feed_path

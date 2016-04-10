@@ -1,6 +1,7 @@
 class FeedsController < ApplicationController
+  before_action :load_feeds, only: [:index, :show]
+
   def index
-    @feeds = Feed.all
   end
 
   def new
@@ -27,6 +28,10 @@ class FeedsController < ApplicationController
   end
 
   protected
+
+  def load_feeds
+    @feeds = Feed.all
+  end
 
   def feed_params
     params.require(:feed).permit(:url)
