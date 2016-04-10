@@ -1,0 +1,12 @@
+%h4= @feed.name
+
+- @articles.each do |article|
+  .card
+    .card-content
+      %span.card-title
+        = article.title
+
+      %p= article.summary.html_safe
+
+    .card-action
+      = link_to "Read More", article.url

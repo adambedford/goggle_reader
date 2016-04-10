@@ -23,6 +23,7 @@ class FeedsController < ApplicationController
 
   def show
     @feed = Feed.find(params[:id])
+    @articles = Feedjira::Feed.fetch_and_parse(@feed.url).entries
   end
 
   protected

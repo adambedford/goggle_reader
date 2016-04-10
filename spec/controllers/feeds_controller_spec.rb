@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe FeedsController, type: :controller do
+  VCR_OPTIONS = { cassette_name: "FeedsController/feed_articles" }
+
   describe "GET index" do
     def do_request(options = {})
       get(:index, options)
@@ -65,16 +67,22 @@ RSpec.describe FeedsController, type: :controller do
     end
   end
 
-  describe "GET show" do
+  describe "GET show", vcr: VCR_OPTIONS do
     def do_request(options = {})
       get(:show, options)
     end
 
     let(:feed) { create(:feed) }
+    let(:articles) {  }
 
     it "finds the correct instance of Feed" do
       do_request(id: feed.id)
       expect(assigns(:feed)).to eq feed
+    end
+
+    it "fetches the feed articles" do
+      do_request(id: feed.id)
+      expect(assigns(:articles).first.title).to eq "Kerala temple fire leaves 100 dead"
     end
 
     # TODO: When there is multi-user, assert that only the user's feeds are shown
