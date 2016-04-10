@@ -1,6 +1,8 @@
 require 'rails_helper'
 
-RSpec.describe Feed, type: :model do
+describe Feed, type: :model do
+  VCR_OPTIONS = { cassette_name: "Feed/bbc_news_world" }
+
   subject { create(:feed) }
 
   describe "validations" do
@@ -21,6 +23,12 @@ RSpec.describe Feed, type: :model do
     end
 
     context "when the cached title is not present" do
+      subject do
+        create(:feed).tap do |feed|
+          feed.cached_title = nil
+        end
+      end
+
       context "when the URL is longer than 50 characters" do
         it "gets truncated with ellipses appended" do
           expect(subject.name).to eq(subject.url.truncate(50))
@@ -32,6 +40,16 @@ RSpec.describe Feed, type: :model do
 
         it "does not get truncated" do
           expect(subject.name).to eq(subject.url)
+        end
+      end
+    end
+  end
+
+  describe "callbacks" do
+    describe "before_save" do
+      describe "setting the feed cached name", vcr: VCR_OPTIONS do
+        it "loads the feed and caches the title" do
+          expect(subject.cached_title).to eq "BBC News - World"
         end
       end
     end

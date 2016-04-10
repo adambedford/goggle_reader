@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe FeedsController, type: :controller do
-  VCR_OPTIONS = { cassette_name: "FeedsController/feed_articles" }
+  VCR_OPTIONS = { cassette_name: "Feed/bbc_news_world" }
 
   describe "GET index" do
     def do_request(options = {})
