@@ -1,8 +1,8 @@
 .col.s12.m4.l3
   - if @feeds.any?
     .collection
-    - @feeds.each do |feed|
-      = link_to feed.name, feed, class: "collection-item"
+      - @feeds.each do |feed|
+        = link_to feed.name, feed, class: "collection-item"
 
   - else
     .card-panel
