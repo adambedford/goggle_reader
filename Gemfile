@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 ruby '2.3.0'
 
 gem 'coffee-rails', '~> 4.1.0'
+gem 'dotenv-rails'
 gem 'feedjira'
 gem 'font-awesome-rails'
 gem 'haml-rails'
