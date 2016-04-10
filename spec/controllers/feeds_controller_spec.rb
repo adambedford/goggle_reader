@@ -65,4 +65,19 @@ RSpec.describe FeedsController, type: :controller do
     end
   end
 
+  describe "GET show" do
+    def do_request(options = {})
+      get(:show, options)
+    end
+
+    let(:feed) { create(:feed) }
+
+    it "finds the correct instance of Feed" do
+      do_request(id: feed.id)
+      expect(assigns(:feed)).to eq feed
+    end
+
+    # TODO: When there is multi-user, assert that only the user's feeds are shown
+  end
+
 end
