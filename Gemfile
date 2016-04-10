@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 ruby '2.3.0'
 
 gem 'coffee-rails', '~> 4.1.0'
+gem 'feedjira'
 gem 'font-awesome-rails'
 gem 'haml-rails'
 gem 'jquery-rails'
@@ -21,6 +22,8 @@ group :development, :test do
   gem 'pry-byebug'
   gem 'rspec-rails'
   gem 'shoulda-matchers'
+  gem 'vcr'
+  gem 'webmock', require: false
 end
 
 group :development do
