@@ -16,4 +16,44 @@ RSpec.describe FeedsController, type: :controller do
     end
   end
 
+  describe "GET new" do
+    def do_request(options = {})
+      get(:new, options)
+    end
+
+    it "assigns a new instance of Feed" do
+      do_request
+      expect(assigns(:feed)).to be_a(Feed)
+    end
+
+    it "renders the new feed template" do
+      expect(do_request).to render_template(:new)
+    end
+  end
+
+  describe "POST create" do
+    def do_request
+      post(:create, feed: attributes)
+    end
+
+    context "when valid" do
+      let(:attributes) { attributes_for(:feed) }
+      let(:feed) { create(:feed) }
+
+      it "creates the feed" do
+        do_request
+        expect(assigns(:feed)).to be_a(Feed)
+      end
+
+      it "increments the feed count" do
+        expect { do_request }.to change { Feed.count }.by(1)
+      end
+
+      it "redirects to the root path with a success message" do
+        expect(do_request).to redirect_to root_path
+        expect(controller).to set_flash[:notice]
+      end
+    end
+  end
+
 end
