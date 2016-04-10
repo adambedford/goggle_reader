@@ -54,6 +54,15 @@ RSpec.describe FeedsController, type: :controller do
         expect(controller).to set_flash[:notice]
       end
     end
+
+    context "when invalid" do
+      let(:attributes) { { url: '' } }
+
+      it "does not change the feed count" do
+        expect{ do_request }.to_not change { Feed.count }
+      end
+
+    end
   end
 
 end

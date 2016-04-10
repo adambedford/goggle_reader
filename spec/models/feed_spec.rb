@@ -16,7 +16,7 @@ RSpec.describe Feed, type: :model do
       end
 
       it "returns the cached title" do
-        expect(subject.name).to eq "BBC News Feed"
+        expect(subject.name).to eq subject.cached_title
       end
     end
 
