@@ -1,15 +1,37 @@
 require 'rails_helper'
 
-RSpec.describe FeedsController, type: :controller do
-  VCR_OPTIONS = { cassette_name: "Feed/bbc_news_world" }
+VCR_OPTIONS = { cassette_name: "Feed/bbc_news_world" }
+
+describe FeedsController, type: :controller, vcr: VCR_OPTIONS do
+  let(:feed_for_bob) { create(:feed, user: bob) }
+  let(:feed_for_jane) { create(:feed, user: jane) }
+  let(:bob) { create(:user) }
+  let(:jane) { create(:user, name: "Jane") }
 
   describe "GET index" do
     def do_request(options = {})
       get(:index, options)
     end
 
+    before do
+      sign_in(bob)
+    end
+
     it "returns success code" do
       expect(do_request).to be_success
+    end
+
+    describe "scoping to current user" do
+      it "loads all feeds for the signed in user" do
+        do_request
+        expect(assigns(:feeds)).to be_a(ActiveRecord::Relation)
+        expect(assigns(:feeds)).to include(feed_for_bob)
+      end
+
+      it "does not load feeds for another user" do
+        do_request
+        expect(assigns(:feeds)).to_not include(feed_for_jane)
+      end
     end
 
     it "returns all feeds" do
@@ -67,30 +89,41 @@ RSpec.describe FeedsController, type: :controller do
     end
   end
 
-  describe "GET show", vcr: VCR_OPTIONS do
+  describe "GET show" do
     def do_request(options = {})
       get(:show, options)
     end
 
-    let(:feed) { create(:feed) }
-    let(:articles) {  }
+    before do
+      sign_in(bob)
+      do_request(id: feed_for_bob.id)
+    end
 
-    it "loads all feeds" do
-      do_request(id: feed.id)
+    it "loads all feeds for the signed in user" do
       expect(assigns(:feeds)).to be_a(ActiveRecord::Relation)
+      expect(assigns(:feeds)).to include(feed_for_bob)
+    end
+
+    it "does not load feeds for another user" do
+      sign_in(bob)
+      do_request(id: feed_for_bob.id)
+      expect(assigns(:feeds)).to_not include(feed_for_jane)
     end
 
     it "finds the correct instance of Feed" do
-      do_request(id: feed.id)
-      expect(assigns(:feed)).to eq feed
+      do_request(id: feed_for_bob.id)
+      expect(assigns(:feed)).to eq feed_for_bob
+    end
+
+    it "raises a Not Found when given an ID belonging to another user" do
+      expect {
+        do_request(id: feed_for_jane.id)
+      }.to raise_error(ActiveRecord::RecordNotFound)
     end
 
     it "fetches the feed articles" do
-      do_request(id: feed.id)
-      expect(assigns(:articles).first.title).to eq "Kerala temple fire leaves 100 dead"
+      do_request(id: feed_for_bob.id)
+      expect(assigns(:articles).first).to be_a(Feedjira::Parser::RSSEntry)
     end
-
-    # TODO: When there is multi-user, assert that only the user's feeds are shown
   end
-
 end

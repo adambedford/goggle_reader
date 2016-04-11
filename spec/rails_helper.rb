@@ -69,4 +69,5 @@ RSpec.configure do |config|
   # Include FactoryGirl methods so you can simply do `create()` instead of
   # `FactoryGirl.create()`
   config.include FactoryGirl::Syntax::Methods
+  config.include AuthenticationHelpers
 end

@@ -23,14 +23,14 @@ class FeedsController < ApplicationController
   end
 
   def show
-    @feed = Feed.find(params[:id])
+    @feed = current_user.feeds.find(params[:id])
     @articles = Feedjira::Feed.fetch_and_parse(@feed.url).entries
   end
 
   protected
 
   def load_feeds
-    @feeds = Feed.all
+    @feeds = current_user.feeds
   end
 
   def feed_params

@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  has_many :feeds, inverse_of: :user
+
   validates :name, presence: true
   validates :uid, presence: true
   validates :provider, presence: true
