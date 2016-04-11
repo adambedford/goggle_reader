@@ -5,11 +5,11 @@ class FeedsController < ApplicationController
   end
 
   def new
-    @feed = Feed.new
+    @feed = current_user.feeds.build
   end
 
   def create
-    @feed = Feed.new(feed_params)
+    @feed = current_user.feeds.build(feed_params)
 
     respond_to do |format|
       if @feed.save

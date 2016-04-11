@@ -45,9 +45,14 @@ describe FeedsController, type: :controller, vcr: VCR_OPTIONS do
       get(:new, options)
     end
 
+    before do
+      sign_in(bob)
+    end
+
     it "assigns a new instance of Feed" do
       do_request
       expect(assigns(:feed)).to be_a(Feed)
+      expect(assigns(:feed).user).to eq bob
     end
 
     it "renders the new feed template" do
@@ -60,13 +65,18 @@ describe FeedsController, type: :controller, vcr: VCR_OPTIONS do
       post(:create, feed: attributes)
     end
 
+    before do
+      sign_in(bob)
+    end
+
     context "when valid" do
       let(:attributes) { attributes_for(:feed) }
       let(:feed) { create(:feed) }
 
-      it "creates the feed" do
+      it "creates the feed for the current user" do
         do_request
         expect(assigns(:feed)).to be_a(Feed)
+        expect(assigns(:feed).user).to eq bob
       end
 
       it "increments the feed count" do
