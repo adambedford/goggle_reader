@@ -37,4 +37,26 @@ RSpec.describe SessionsController, type: :controller do
     end
   end
 
+  describe "#destroy" do
+    before do
+      post(:create, provider: :google)
+    end
+
+    def do_request
+      delete(:destroy)
+    end
+
+    it "should clear the session" do
+      expect(session[:user_id]).to_not be_nil
+      do_request
+      expect(session[:user_id]).to be_nil
+    end
+
+    it "should redirect to the root path with a notice" do
+      do_request
+      expect(response).to redirect_to root_path
+      expect(controller).to set_flash[:notice]
+    end
+  end
+
 end
