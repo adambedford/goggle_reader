@@ -20,9 +20,13 @@
     %meta{:content => "width=device-width", :name => "viewport"}/
 
   %body
-    = render "layouts/messages"
+    - if user_signed_in?
+      = render "layouts/messages"
 
-    = render "layouts/navigation"
+      = render "layouts/navigation"
 
-    .row
-      = yield
+      .row
+        = yield
+
+    - else
+      = render "signed_out_index"
