@@ -1,8 +1,7 @@
 require 'rails_helper'
 
-RSpec.describe SessionsController, type: :controller do
+describe SessionsController, type: :controller do
   before do
-    OmniAuth.config.test_mode = true
     request.env["omniauth.auth"] = auth_hash
   end
 
@@ -30,11 +29,6 @@ RSpec.describe SessionsController, type: :controller do
       do_request(provider: :google)
       expect(session[:user_id]).to_not be_nil
     end
-
-    it "should redirect to the root path" do
-      do_request(provider: :google)
-      expect(response).to redirect_to root_path
-    end
   end
 
   describe "#destroy" do
@@ -58,5 +52,4 @@ RSpec.describe SessionsController, type: :controller do
       expect(controller).to set_flash[:notice]
     end
   end
-
 end

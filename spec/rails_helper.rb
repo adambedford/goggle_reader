@@ -34,6 +34,8 @@ Shoulda::Matchers.configure do |config|
   end
 end
 
+OmniAuth.config.test_mode = true
+
 Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 
 RSpec.configure do |config|
@@ -70,4 +72,5 @@ RSpec.configure do |config|
   # `FactoryGirl.create()`
   config.include FactoryGirl::Syntax::Methods
   config.include AuthenticationHelpers
+  config.include OmniauthHelpers
 end
