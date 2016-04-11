@@ -10,6 +10,10 @@ class SessionsController < ApplicationController
     redirect_to root_path, notice: "Signed out"
   end
 
+  def failure
+    redirect_to root_path, alert: "Authentication failure"
+  end
+
   protected
 
   def omniauth_auth
