@@ -59,4 +59,11 @@ describe Feed, type: :model do
       end
     end
   end
+
+  describe "#refresh" do
+    it "updates the last_refresh_at timestamp" do
+      subject.refresh!
+      expect(subject.last_refresh_at).to be_within(5.seconds).of(Time.now)
+    end
+  end
 end

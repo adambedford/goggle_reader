@@ -13,6 +13,8 @@ class Feed < ActiveRecord::Base
 
   def refresh!
     ArticleSync.new(self).sync
+    self.last_refresh_at = Time.now
+    save
   end
 
   protected
