@@ -11,8 +11,8 @@ class Feed < ActiveRecord::Base
     cached_title || url.truncate(50)
   end
 
-  def articles
-    Feedjira::Feed.fetch_and_parse(url).entries
+  def refresh!
+    ArticleSync.new(self).sync
   end
 
   protected
