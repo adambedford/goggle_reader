@@ -2,6 +2,7 @@
   = link_to "Add Feed", new_feed_path, class: "btn waves-effect waves-light"
 
   .collection
+    = link_to "All Feeds", feeds_path, class: "collection-item"
     - @feeds.each do |feed|
       = link_to feed.name, feed, class: "collection-item"
 
