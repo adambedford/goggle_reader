@@ -1,0 +1,9 @@
+class Article < ActiveRecord::Base
+  belongs_to :feed, inverse_of: :articles
+  belongs_to :user, inverse_of: :articles
+
+  validates :feed_id, presence: true
+  validates :user_id, presence: true
+  validates :title, presence: true
+  validates :url, presence: true
+end

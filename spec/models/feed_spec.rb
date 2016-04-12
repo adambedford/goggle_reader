@@ -5,6 +5,11 @@ describe Feed, type: :model do
 
   subject { create(:feed) }
 
+  describe "associations" do
+    it { should belong_to(:user).inverse_of(:feeds) }
+    it { should have_many(:articles).inverse_of(:feed) }
+  end
+
   describe "validations" do
     it { should validate_presence_of(:url)}
   end

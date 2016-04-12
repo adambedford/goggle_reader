@@ -1,6 +1,11 @@
 require 'rails_helper'
 
 describe User, type: :model do
+  describe "associations" do
+    it { should have_many(:feeds).inverse_of(:user) }
+    it { should have_many(:articles).inverse_of(:user) }
+  end
+
   describe "validations" do
     it { should validate_presence_of(:name) }
     it { should validate_presence_of(:provider) }

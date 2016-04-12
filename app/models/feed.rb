@@ -1,6 +1,8 @@
 class Feed < ActiveRecord::Base
   belongs_to :user, inverse_of: :feeds
 
+  has_many :articles, inverse_of: :feed
+
   validates :url, presence: true
 
   before_create :fetch_feed_and_load_title
