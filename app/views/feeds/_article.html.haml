@@ -1,0 +1,12 @@
+.card
+  .card-content
+    %span.card-title
+      = article.title
+
+    %p= article.summary.html_safe
+
+  .card-action
+    = link_to "Read More", article.url, target: "_blank"
+
+    %span.right
+      = time_ago_in_words(article.published)

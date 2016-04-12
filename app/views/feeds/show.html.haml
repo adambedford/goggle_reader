@@ -4,13 +4,5 @@
 .col.s12.m8.l9
   %h4= @feed.name
 
-  - @articles.each do |article|
-    .card
-      .card-content
-        %span.card-title
-          = article.title
+  = render partial: 'article', collection: @feed.articles
 
-        %p= article.summary.html_safe
-
-      .card-action
-        = link_to "Read More", article.url, target: "_blank"
