@@ -1,3 +1,6 @@
 .col.s12.m4.l3
   = render 'list'
+
 .col.s12.m8.l9
+  - @articles.each do |article|
+    = render partial: 'article', locals: { article: article }
