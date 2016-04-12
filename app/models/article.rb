@@ -6,4 +6,6 @@ class Article < ActiveRecord::Base
   validates :user_id, presence: true
   validates :title, presence: true
   validates :url, presence: true
+
+  default_scope -> { order("published_at DESC") }
 end
