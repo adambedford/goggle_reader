@@ -14,6 +14,7 @@ gem 'pg', '~> 0.15'
 gem 'puma'
 gem 'rails', '4.2.5.1'
 gem 'sass-rails', '~> 5.0'
+gem 'sidekiq'
 gem 'simple_form'
 gem 'simple_form-materialize', github: 'patricklindsay/simple_form-materialize'
 gem 'therubyracer', platforms: :ruby
