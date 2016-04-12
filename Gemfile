@@ -24,6 +24,7 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'pry'
   gem 'pry-byebug'
+  gem 'rspec-activejob'
   gem 'rspec-rails'
   gem 'shoulda-matchers'
   gem 'vcr'

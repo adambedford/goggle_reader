@@ -192,6 +192,9 @@ GEM
     rake (11.1.2)
     redis (3.2.2)
     ref (2.0.0)
+    rspec-activejob (0.6.1)
+      activejob (>= 4.2)
+      rspec-mocks
     rspec-core (3.4.4)
       rspec-support (~> 3.4.0)
     rspec-expectations (3.4.0)
@@ -277,6 +280,7 @@ DEPENDENCIES
   puma
   rails (= 4.2.5.1)
   rails_12factor
+  rspec-activejob
   rspec-rails
   sass-rails (~> 5.0)
   shoulda-matchers
