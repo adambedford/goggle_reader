@@ -4,5 +4,10 @@
 .col.s12.m8.l9
   %h4= @feed.name
 
+  %span.right
+    = link_to "Refresh", refresh_feed_path, class: "btn waves-effect waves-light"
+
+  .clearfix
+
   = render partial: 'article', collection: @feed.articles
 
