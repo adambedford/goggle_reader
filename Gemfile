@@ -15,6 +15,7 @@ gem 'puma'
 gem 'rails', '4.2.5.1'
 gem 'sass-rails', '~> 5.0'
 gem 'sidekiq'
+gem 'sidekiq-scheduler', '~> 2.0'
 gem 'simple_form'
 gem 'simple_form-materialize', github: 'patricklindsay/simple_form-materialize'
 gem 'therubyracer', platforms: :ruby
