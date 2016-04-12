@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
   root to: "home#index"
 
-  resources :feeds
+  resources :feeds do
+    member do
+      get :refresh
+    end
+  end
 
 
   match "/auth/:provider/callback", to: "sessions#create", via: [:get, :post]

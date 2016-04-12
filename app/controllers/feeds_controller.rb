@@ -24,7 +24,17 @@ class FeedsController < ApplicationController
 
   def show
     @feed = current_user.feeds.find(params[:id])
-    @articles = Feedjira::Feed.fetch_and_parse(@feed.url).entries
+  end
+
+  def refresh
+    @feed = current_user.feeds.find(params[:id])
+
+    if @feed.refresh!
+      redirect_to @feed
+    else
+      redirect_to @feed, alert: "Unable to refresh feed"
+    end
+
   end
 
   protected

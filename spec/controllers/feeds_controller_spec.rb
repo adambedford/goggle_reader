@@ -130,10 +130,26 @@ describe FeedsController, type: :controller, vcr: VCR_OPTIONS do
         do_request(id: feed_for_jane.id)
       }.to raise_error(ActiveRecord::RecordNotFound)
     end
+  end
 
-    it "fetches the feed articles" do
+  describe "GET refresh" do
+    def do_request(options = {})
+      get(:refresh, options)
+    end
+
+    before(:each) do
+      sign_in(bob)
       do_request(id: feed_for_bob.id)
-      expect(assigns(:articles).first).to be_a(Feedjira::Parser::RSSEntry)
+    end
+
+    it "redirects to the feed path if the refresh was successful" do
+      expect(response).to redirect_to feed_for_bob
+    end
+
+    it "raises a Not Found when given a feed ID belonging to another user" do
+      expect {
+        do_request(id: feed_for_jane.id)
+      }.to raise_error(ActiveRecord::RecordNotFound)
     end
   end
 end
