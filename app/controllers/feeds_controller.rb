@@ -2,6 +2,7 @@ class FeedsController < ApplicationController
   before_action :load_feeds, only: [:index, :show]
 
   def index
+    @articles = current_user.articles
   end
 
   def new
