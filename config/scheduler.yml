@@ -1,0 +1,3 @@
+refresh_all_feeds:
+  every: 5m
+  class: RefreshAllFeedsJob
