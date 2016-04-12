@@ -60,10 +60,16 @@ describe Feed, type: :model do
     end
   end
 
-  describe "#refresh" do
+  describe "#refresh!" do
     it "updates the last_refresh_at timestamp" do
       subject.refresh!
       expect(subject.last_refresh_at).to be_within(5.seconds).of(Time.now)
+    end
+  end
+
+  describe "#refresh_later!" do
+    it "enqueues the job" do
+      expect { subject.refresh_later! }.to enqueue_a(RefreshFeedJob).with(global_id(subject))
     end
   end
 end

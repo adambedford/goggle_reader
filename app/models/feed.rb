@@ -12,9 +12,11 @@ class Feed < ActiveRecord::Base
   end
 
   def refresh!
-    ArticleSync.new(self).sync
-    self.last_refresh_at = Time.now
-    save
+    RefreshFeedJob.perform_now(self)
+  end
+
+  def refresh_later!
+    RefreshFeedJob.perform_later(self)
   end
 
   protected
