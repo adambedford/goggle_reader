@@ -83,3 +83,4 @@ production:
   database: goggle_reader_production
   username: goggle_reader
   password: <%= ENV['GOGGLE_READER_DATABASE_PASSWORD'] %>
+  pool: <%= ENV['DATABASE_POOL'] %>
