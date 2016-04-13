@@ -5,6 +5,7 @@ describe User, type: :model do
     it { should have_many(:feed_subscriptions).inverse_of(:user) }
     it { should have_many(:feeds).through(:feed_subscriptions) }
     it { should have_many(:articles).through(:feeds) }
+    it { should have_many(:bookmarked_articles).inverse_of(:user) }
   end
 
   describe "validations" do
