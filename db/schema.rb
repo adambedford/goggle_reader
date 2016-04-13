@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160413203802) do
+ActiveRecord::Schema.define(version: 20160413203924) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,16 +22,13 @@ ActiveRecord::Schema.define(version: 20160413203802) do
     t.text     "summary"
     t.string   "url"
     t.string   "image_url"
-    t.datetime "bookmarked_at"
     t.integer  "feed_id"
-    t.integer  "user_id"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
     t.datetime "published_at"
   end
 
   add_index "articles", ["feed_id"], name: "index_articles_on_feed_id", using: :btree
-  add_index "articles", ["user_id"], name: "index_articles_on_user_id", using: :btree
 
   create_table "feed_subscriptions", force: :cascade do |t|
     t.integer  "feed_id"
@@ -60,7 +57,6 @@ ActiveRecord::Schema.define(version: 20160413203802) do
   end
 
   add_foreign_key "articles", "feeds"
-  add_foreign_key "articles", "users"
   add_foreign_key "feed_subscriptions", "feeds"
   add_foreign_key "feed_subscriptions", "users"
 end
