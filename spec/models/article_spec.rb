@@ -23,11 +23,34 @@ describe Article, type: :model do
     end
   end
 
-  describe "#bookmark_for_user" do
+  describe "bookmarking" do
     let(:user) { create(:user) }
 
-    it "creates a bookmarked article record for the given user" do
-      expect { subject.bookmark_for_user(user) }.to change { BookmarkedArticle.count }.by(1)
+    describe "#bookmark_for_user" do
+      it "creates a bookmarked article record for the given user" do
+        expect { subject.bookmark_for_user(user) }.to change { BookmarkedArticle.count }.by(1)
+      end
+    end
+
+    describe "#bookmarked_by_user?" do
+      context "when the given user has bookmarked the article" do
+        before do
+          create(:bookmarked_article, user: user, article: subject)
+        end
+        it "returns true" do
+          expect(subject.bookmarked_by_user?(user)).to be_truthy
+        end
+      end
+
+      context "when the given user has not bookmarked the article" do
+        before do
+          user.bookmarked_articles.delete_all
+        end
+
+        it "returns false" do
+          expect(subject.bookmarked_by_user?(user)).to be_falsey
+        end
+      end
     end
   end
 end

@@ -13,4 +13,8 @@ class Article < ActiveRecord::Base
   def bookmark_for_user(user)
     user.bookmarked_articles.create(article: self)
   end
+
+  def bookmarked_by_user?(user)
+    user.bookmarked_articles.where(article: self).any?
+  end
 end
