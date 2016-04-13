@@ -2,6 +2,12 @@ Rails.application.routes.draw do
   root to: "home#index"
 
   resources :feeds do
+    resources :articles, only: [:index] do
+      member do
+        get :bookmark
+      end
+    end
+
     member do
       get :refresh
     end
