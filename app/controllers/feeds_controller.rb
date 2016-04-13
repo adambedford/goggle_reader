@@ -32,12 +32,7 @@ class FeedsController < ApplicationController
   def refresh
     @feed = current_user.feeds.find(params[:id])
 
-    if @feed.refresh!
-      redirect_to @feed
-    else
-      redirect_to @feed, alert: "Unable to refresh feed"
-    end
-
+    redirect_to @feed
   end
 
   protected
