@@ -1,5 +1,6 @@
 class Feed < ActiveRecord::Base
-  belongs_to :user, inverse_of: :feeds
+  has_many :feed_subscriptions, dependent: :destroy
+  has_many :users, through: :feed_subscriptions
 
   has_many :articles, inverse_of: :feed
 

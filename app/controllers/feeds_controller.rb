@@ -6,11 +6,13 @@ class FeedsController < ApplicationController
   end
 
   def new
-    @feed = current_user.feeds.build
+    @feed = Feed.new
+    @feed.users.push(current_user)
   end
 
   def create
-    @feed = current_user.feeds.build(feed_params)
+    @feed = Feed.find_or_initialize_by(url: params[:feed][:url])
+    @feed.users.push(current_user)
 
     respond_to do |format|
       if @feed.save

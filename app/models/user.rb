@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
-  has_many :feeds, inverse_of: :user
-  has_many :articles, inverse_of: :user
+  has_many :feed_subscriptions, inverse_of: :user
+  has_many :feeds, through: :feed_subscriptions
+  has_many :articles, through: :feeds
 
   validates :name, presence: true
   validates :uid, presence: true

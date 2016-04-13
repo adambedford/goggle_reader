@@ -5,6 +5,5 @@ FactoryGirl.define do
     url     "http://news-source.com/article.php"
     external_id "1"
     feed
-    user
   end
 end

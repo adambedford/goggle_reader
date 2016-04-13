@@ -18,7 +18,6 @@ class ArticleSync
   def create_or_update_article(entry)
     Article.find_or_initialize_by(external_id: entry.id).tap do |article|
       article.feed = feed
-      article.user = feed.user
       article.title = entry.title
       article.summary = entry.summary
       article.url = entry.url

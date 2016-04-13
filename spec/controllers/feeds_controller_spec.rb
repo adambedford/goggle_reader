@@ -3,10 +3,15 @@ require 'rails_helper'
 VCR_OPTIONS = { cassette_name: "Feed/bbc_news_world" }
 
 describe FeedsController, type: :controller, vcr: VCR_OPTIONS do
-  let(:feed_for_bob) { create(:feed, user: bob) }
-  let(:feed_for_jane) { create(:feed, user: jane) }
+  let(:feed_for_bob) { create(:feed) }
+  let(:feed_for_jane) { create(:feed) }
   let(:bob) { create(:user) }
   let(:jane) { create(:user, name: "Jane") }
+
+  before do
+    create(:feed_subscription, feed: feed_for_bob, user: bob)
+    create(:feed_subscription, feed: feed_for_jane, user: jane)
+  end
 
   describe "GET index" do
     def do_request(options = {})
@@ -52,7 +57,7 @@ describe FeedsController, type: :controller, vcr: VCR_OPTIONS do
     it "assigns a new instance of Feed" do
       do_request
       expect(assigns(:feed)).to be_a(Feed)
-      expect(assigns(:feed).user).to eq bob
+      expect(assigns(:feed).users).to include bob
     end
 
     it "renders the new feed template" do
@@ -71,17 +76,36 @@ describe FeedsController, type: :controller, vcr: VCR_OPTIONS do
 
     context "when valid" do
       let(:attributes) { attributes_for(:feed) }
-      let(:feed) { create(:feed) }
 
-      it "creates the feed for the current user" do
-        do_request
-        expect(assigns(:feed)).to be_a(Feed)
-        expect(assigns(:feed).user).to eq bob
+      context "when it is a brand new feed" do
+        before do
+          Feed.destroy_all
+        end
+
+        it "increments the feed count" do
+          expect { do_request }.to change { Feed.count }.by(1)
+        end
+
+        it "creates a new Feed and subscribes the user to it" do
+          do_request
+          expect(assigns(:feed)).to be_a(Feed)
+          expect(assigns(:feed).users).to include bob
+        end
       end
 
-      it "increments the feed count" do
-        expect { do_request }.to change { Feed.count }.by(1)
+      context "when the feed already exists" do
+        let(:feed) { create(:feed) }
+
+        it "doesn't create a new feed" do
+          expect { do_request }.to_not change { Feed.count }
+        end
+
+        it "it subscribes the user to it" do
+          expect { do_request }.to change { FeedSubscription.count }.by(1)
+          expect(FeedSubscription.last.user).to eq bob
+        end
       end
+
 
       it "redirects to the root path with a success message" do
         expect(do_request).to redirect_to root_path
