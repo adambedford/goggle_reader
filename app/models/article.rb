@@ -8,6 +8,8 @@ class Article < ActiveRecord::Base
   validates :title, presence: true
   validates :url, presence: true
 
+  scope :bookmarked_by_user, ->(user) { where(id: user.bookmarked_articles.pluck(:article_id)) }
+
   default_scope -> { order("published_at DESC") }
 
   def bookmark_for_user(user)

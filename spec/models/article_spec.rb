@@ -21,6 +21,21 @@ describe Article, type: :model do
     it "should have default scope to order by published_at, descending" do
       expect(Article.all).to eq [article_2, article_1]
     end
+
+    describe "bookmarked_by_user scope" do
+      let(:bob) { create(:user) }
+      let(:jane) { create(:user, name: "Jane") }
+      let!(:bob_bookmark) { create(:bookmarked_article, article: article_1, user: bob) }
+      let!(:jane_bookmark) { create(:bookmarked_article, article: article_2, user: jane) }
+
+      it "returns a collection of the given user's articles" do
+        expect(described_class.bookmarked_by_user(bob)).to include article_1
+      end
+
+      it "does not include articles bookmarked by another user" do
+        expect(described_class.bookmarked_by_user(bob)).to_not include article_2
+      end
+    end
   end
 
   describe "bookmarking" do

@@ -1,7 +1,6 @@
 class BookmarkedArticlesController < ApplicationController
   def index
-    # TODO: Add scope to Article for this
-    @bookmarked_articles = Article.where(id: current_user.bookmarked_articles.pluck(:article_id))
+    @bookmarked_articles = Article.bookmarked_by_user(current_user)
   end
 
   def create
