@@ -1,6 +1,10 @@
 class BookmarkedArticlesController < ApplicationController
   def index
-    @bookmarked_articles = Article.bookmarked_by_user(current_user)
+    if params[:feed_id].present?
+      @bookmarked_articles = Article.bookmarked_by_user(current_user).for_feed(params[:feed_id])
+    else
+      @bookmarked_articles = Article.bookmarked_by_user(current_user)
+    end
   end
 
   def create
