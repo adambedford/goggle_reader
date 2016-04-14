@@ -1,12 +1,13 @@
 .row
-  - if @feeds.any?
-    .section
-      = link_to "Add Feed", new_feed_path, class: "btn waves-effect waves-light"
+  .section
+    .row.center-align
+      = link_to "Add Feed", new_feed_path, class: "btn waves-effect waves-light col l12"
 
+  - if current_user.feeds.any?
     .section
       .collection
         = link_to "All Feeds", feeds_path, class: "collection-item"
-        - @feeds.each do |feed|
+        - current_user.feeds.each do |feed|
           = link_to feed.name, feed, class: "collection-item"
 
   - else

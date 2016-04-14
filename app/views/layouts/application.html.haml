@@ -26,7 +26,12 @@
       = render "layouts/navigation"
 
       .row
-        = yield
+        .col.s12.m4.l3
+          - if content_for?(:side_panel)
+            = yield(:side_panel)
+
+        .col.s12.m8.l9
+          = yield
 
     - else
       = render "signed_out_index"
