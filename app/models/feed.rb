@@ -2,7 +2,7 @@ class Feed < ActiveRecord::Base
   has_many :feed_subscriptions, dependent: :destroy
   has_many :users, through: :feed_subscriptions
 
-  has_many :articles, inverse_of: :feed
+  has_many :articles, inverse_of: :feed, dependent: :destroy
 
   validates :url, presence: true
 

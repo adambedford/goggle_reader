@@ -4,6 +4,7 @@ class Article < ActiveRecord::Base
   has_many :user_bookmarks, class_name: "BookmarkedArticle"
   has_many :users, through: :user_bookmarks
 
+  validates :external_id, presence: true
   validates :feed_id, presence: true
   validates :title, presence: true
   validates :url, presence: true

@@ -6,7 +6,9 @@ describe Feed, type: :model do
   subject { create(:feed) }
 
   describe "associations" do
-    it { should have_many(:articles).inverse_of(:feed) }
+    it { should have_many(:users).through(:feed_subscriptions) }
+    it { should have_many(:feed_subscriptions).dependent(:destroy) }
+    it { should have_many(:articles).inverse_of(:feed).dependent(:destroy) }
   end
 
   describe "validations" do
