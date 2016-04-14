@@ -7,6 +7,7 @@ class Feed < ActiveRecord::Base
   validates :url, presence: true
 
   before_create :fetch_feed_and_load_title
+  after_create :refresh!
 
   def name
     cached_title || url.truncate(50)
