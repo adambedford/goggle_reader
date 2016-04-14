@@ -6,9 +6,10 @@
   - if current_user.feeds.any?
     .section
       .collection
-        = link_to "All Feeds", feeds_path, class: "collection-item"
+        = feed_link "All Feeds", feeds_path, class: "collection-item"
+
         - current_user.feeds.each do |feed|
-          = link_to feed.name, feed, class: "collection-item"
+          = feed_link feed.name, feed_path(feed), class: "collection-item"
 
   - else
     .card-panel
