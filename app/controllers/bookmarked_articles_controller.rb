@@ -5,6 +5,8 @@ class BookmarkedArticlesController < ApplicationController
     else
       @bookmarked_articles = Article.bookmarked_by_user(current_user)
     end
+
+    @bookmarked_feeds = Feed.bookmarked_by_user(current_user)
   end
 
   def create

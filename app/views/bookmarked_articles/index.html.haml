@@ -1,6 +1,11 @@
-.col.s12.m4.l3
-  = render 'feeds/list'
+- content_for(:side_panel) do
+  = render 'list'
 
-.col.s12.m8.l9
-  - @bookmarked_articles.each do |article|
-    = render partial: 'feeds/article', locals: { article: article }
+%h4 Bookmarked Articles
+
+- if @bookmarked_articles.any?
+  = render partial: 'feeds/article', collection: @bookmarked_articles, as: :article
+
+- else
+  .well
+    You have not bookmarked any articles

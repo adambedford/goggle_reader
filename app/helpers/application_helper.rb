@@ -18,4 +18,19 @@ module ApplicationHelper
       content_tag(:i, "star_outline", class: "material-icons")
     end
   end
+
+  def feed_link(name, path, options = {})
+    active_class = "active"
+
+    if request.fullpath == path
+      if options.has_key?(:class)
+        options[:class] << " "
+        options[:class] << active_class
+      else
+        options[:class] = active_class
+      end
+    end
+
+    link_to(name, path, options)
+  end
 end

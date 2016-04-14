@@ -1,0 +1,7 @@
+- if @bookmarked_feeds.any?
+  .section
+    .collection
+      = feed_link "All Bookmarked Articles", bookmarked_articles_path, class: "collection-item"
+
+      - @bookmarked_feeds.each do |feed|
+        = feed_link feed.name, bookmarked_articles_path(feed_id: feed.id), class: "collection-item", active_condition: params[:feed_id].to_s == feed.id
