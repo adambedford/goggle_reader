@@ -29,6 +29,7 @@ class FeedsController < ApplicationController
 
   def refresh
     @feed = current_user.feeds.find(params[:id])
+    @feed.refresh!
 
     redirect_to @feed
   end
