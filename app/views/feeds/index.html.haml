@@ -2,5 +2,5 @@
   = render 'list'
 
 .col.s12.m8.l9
-  - @articles.each do |article|
-    = render partial: 'article', locals: { article: article }
+  .cards-container
+    = render partial: 'article', collection: @articles

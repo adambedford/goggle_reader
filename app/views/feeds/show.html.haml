@@ -9,5 +9,6 @@
 
   .clearfix
 
-  = render partial: 'article', collection: @feed.articles
+  .cards-container
+    = render partial: 'article', collection: @feed.articles
 

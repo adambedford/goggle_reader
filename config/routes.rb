@@ -13,7 +13,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :bookmarked_articles, only: [:index, :destroy]
+  resources :bookmarked_articles, only: [:index, :create, :destroy]
 
 
   match "/auth/:provider/callback", to: "sessions#create", via: [:get, :post]

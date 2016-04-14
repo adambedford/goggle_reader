@@ -12,6 +12,7 @@ describe ArticlesController, type: :controller do
 
     before(:each) do
       sign_in(user)
+      request.env["HTTP_REFERER"] = feed_path(article.feed)
       do_request(feed_id: feed.id, id: article.id)
     end
 
