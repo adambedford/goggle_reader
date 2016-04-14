@@ -9,6 +9,14 @@ class Feed < ActiveRecord::Base
   before_create :fetch_feed_and_load_title
   after_create :refresh!
 
+  scope :bookmarked_by_user, ->(user) do
+    def self.bookmarked_articles(user)
+      BookmarkedArticle.preload(:article).for_user(user)
+    end
+
+    where(id: bookmarked_articles(user).map { |bookmark| bookmark.article.feed_id })
+  end
+
   def name
     cached_title || url.truncate(50)
   end

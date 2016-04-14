@@ -13,6 +13,25 @@ describe Feed, type: :model do
     it { should validate_presence_of(:url)}
   end
 
+  describe "scopes" do
+    describe "bookmarked_by_user" do
+      let(:user) { create(:user) }
+      let(:feed_1) { create(:feed) }
+      let(:feed_2) { create(:feed) }
+      let(:article_1) { create(:article, feed: feed_1) }
+      let(:article_2) { create(:article, feed: feed_2) }
+      let!(:bookmark_1) { create(:bookmarked_article, article: article_1, user: user)}
+
+      it "returns a collection of feeds for articles that the given user has bookmarked" do
+        expect(described_class.bookmarked_by_user(user)).to include(feed_1)
+      end
+
+      it "does not include feeds if a user has not bookmarked an article for those feeds" do
+        expect(described_class.bookmarked_by_user(user)).to_not include(feed_2)
+      end
+    end
+  end
+
   describe "#name" do
     context "when the cached title is present" do
       subject do
