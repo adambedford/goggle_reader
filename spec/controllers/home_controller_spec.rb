@@ -19,8 +19,8 @@ describe HomeController, type: :controller do
         sign_in(user)
       end
 
-      it "redirects to the feeds index" do
-        expect(do_request).to redirect_to feeds_path
+      it "redirects to the articles index" do
+        expect(do_request).to redirect_to articles_path
       end
     end
   end

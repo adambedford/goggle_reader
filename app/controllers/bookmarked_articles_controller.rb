@@ -15,7 +15,7 @@ class BookmarkedArticlesController < ApplicationController
     respond_to do |format|
       if @bookmarked_article.save
         format.html { redirect_to bookmarked_articles_path, notice: "Article bookmarked" }
-        format.js { render partial: "feeds/article", locals: { article: @bookmarked_article.article } }
+        format.js { render partial: "articles/article", locals: { article: @bookmarked_article.article } }
       else
         format.html { redirect_to bookmarked_articles_path, alert: "Unable to bookmark article" }
         format.js { render text: "Unable to bookmark article" }
@@ -29,7 +29,7 @@ class BookmarkedArticlesController < ApplicationController
     respond_to do |format|
       if @bookmarked_article.destroy
         format.html { redirect_to bookmarked_articles_path }
-        format.js { render partial: "feeds/article", locals: { article: @bookmarked_article.article } }
+        format.js { render partial: "articles/article", locals: { article: @bookmarked_article.article } }
       else
         format.html { redirect_to bookmarked_articles_path, alert: "Unable to remove bookmark"}
         format.js { render text: "Unable to remove bookmark" }

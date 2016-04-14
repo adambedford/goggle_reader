@@ -23,5 +23,4 @@ class @BookmarkedArticles
     return false
 
 $ ->
-  if window.location.href.replace(/https?:\/\/.*?\//g, '').match(/^feeds/)
-    window.currentPage = new BookmarkedArticles
+  window.currentPage = new BookmarkedArticles

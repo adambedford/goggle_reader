@@ -13,38 +13,6 @@ describe FeedsController, type: :controller, vcr: VCR_OPTIONS do
     create(:feed_subscription, feed: feed_for_jane, user: jane)
   end
 
-  describe "GET index" do
-    def do_request(options = {})
-      get(:index, options)
-    end
-
-    before do
-      sign_in(bob)
-    end
-
-    it "returns success code" do
-      expect(do_request).to be_success
-    end
-
-    describe "scoping to current user" do
-      it "loads all feeds for the signed in user" do
-        do_request
-        expect(assigns(:feeds)).to be_a(ActiveRecord::Relation)
-        expect(assigns(:feeds)).to include(feed_for_bob)
-      end
-
-      it "does not load feeds for another user" do
-        do_request
-        expect(assigns(:feeds)).to_not include(feed_for_jane)
-      end
-    end
-
-    it "returns all feeds" do
-      do_request
-      expect(assigns(:feeds)).to be_a(ActiveRecord::Relation)
-    end
-  end
-
   describe "GET new" do
     def do_request(options = {})
       get(:new, options)
@@ -96,6 +64,10 @@ describe FeedsController, type: :controller, vcr: VCR_OPTIONS do
       context "when the feed already exists" do
         let(:feed) { create(:feed) }
 
+        before(:each) do
+          FeedSubscription.delete_all
+        end
+
         it "doesn't create a new feed" do
           expect { do_request }.to_not change { Feed.count }
         end
@@ -105,7 +77,6 @@ describe FeedsController, type: :controller, vcr: VCR_OPTIONS do
           expect(FeedSubscription.last.user).to eq bob
         end
       end
-
 
       it "redirects to the root path with a success message" do
         expect(do_request).to redirect_to root_path
@@ -131,17 +102,6 @@ describe FeedsController, type: :controller, vcr: VCR_OPTIONS do
     before do
       sign_in(bob)
       do_request(id: feed_for_bob.id)
-    end
-
-    it "loads all feeds for the signed in user" do
-      expect(assigns(:feeds)).to be_a(ActiveRecord::Relation)
-      expect(assigns(:feeds)).to include(feed_for_bob)
-    end
-
-    it "does not load feeds for another user" do
-      sign_in(bob)
-      do_request(id: feed_for_bob.id)
-      expect(assigns(:feeds)).to_not include(feed_for_jane)
     end
 
     it "finds the correct instance of Feed" do

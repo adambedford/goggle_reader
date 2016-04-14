@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
   root to: "home#index"
 
-  resources :feeds do
-    resources :articles, only: [:index] do
+  resources :articles, only: [:index]
+
+  resources :feeds, only: [:new, :create, :show] do
+    resources :articles do
       member do
         get :bookmark
       end

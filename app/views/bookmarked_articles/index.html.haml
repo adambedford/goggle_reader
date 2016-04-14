@@ -4,7 +4,7 @@
 %h4 Bookmarked Articles
 
 - if @bookmarked_articles.any?
-  = render partial: 'feeds/article', collection: @bookmarked_articles, as: :article
+  = render partial: 'articles/article', collection: @bookmarked_articles, as: :article
 
 - else
   .well

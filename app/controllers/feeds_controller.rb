@@ -1,8 +1,4 @@
 class FeedsController < ApplicationController
-  def index
-    @articles = current_user.articles
-  end
-
   def new
     @feed = Feed.new
     @feed.users.push(current_user)
