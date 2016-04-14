@@ -18,8 +18,10 @@ describe Article, type: :model do
     let(:article_1) { create(:article, published_at: 1.day.ago) }
     let(:article_2) { create(:article, published_at: Time.now) }
 
-    it "should have default scope to order by published_at, descending" do
-      expect(Article.all).to eq [article_2, article_1]
+    describe "default scope" do
+      it "should have default scope to order by published_at, descending" do
+        expect(Article.all.to_sql).to eq Article.order("published_at DESC").to_sql
+      end
     end
 
     describe "bookmarked_by_user scope" do
@@ -34,6 +36,25 @@ describe Article, type: :model do
 
       it "does not include articles bookmarked by another user" do
         expect(described_class.bookmarked_by_user(bob)).to_not include article_2
+      end
+    end
+
+    describe "for_feed scope" do
+      let!(:feed_1) { create(:feed) }
+      let!(:feed_2) { create(:feed) }
+      let!(:feed_1_article) { create(:article, feed: feed_1) }
+      let!(:feed_2_article) { create(:article, feed: feed_2) }
+
+      it "returns a collection of the given feed's articles" do
+        expect(described_class.for_feed(feed_1)).to include feed_1_article
+      end
+
+      it "does not include articles from another feed" do
+        expect(described_class.for_feed(feed_1)).to_not include feed_2_article
+      end
+
+      it "works can receive either a feed object or a feed ID" do
+        expect(described_class.for_feed(feed_1.id)).to include feed_1_article
       end
     end
   end

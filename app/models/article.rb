@@ -9,6 +9,7 @@ class Article < ActiveRecord::Base
   validates :url, presence: true
 
   scope :bookmarked_by_user, ->(user) { where(id: user.bookmarked_articles.pluck(:article_id)) }
+  scope :for_feed, ->(feed) { where(feed_id: (feed.is_a?(Feed) ? feed.id : feed)) }
 
   default_scope -> { order("published_at DESC") }
 
