@@ -9,4 +9,6 @@
     = link_to "Read More", article.url, target: "_blank"
 
     %span.right
+      = bookmark_article_link(article)
+
       = "#{time_ago_in_words(article.published_at)} ago"
