@@ -9,30 +9,16 @@ class BookmarkedArticlesController < ApplicationController
     @bookmarked_feeds = Feed.bookmarked_by_user(current_user)
   end
 
-  def create
-    @bookmarked_article = current_user.bookmarked_articles.build(bookmarked_article_params)
-
-    respond_to do |format|
-      if @bookmarked_article.save
-        format.html { redirect_to bookmarked_articles_path, notice: "Article bookmarked" }
-        format.js { render partial: "articles/article", locals: { article: @bookmarked_article.article } }
-      else
-        format.html { redirect_to bookmarked_articles_path, alert: "Unable to bookmark article" }
-        format.js { render text: "Unable to bookmark article" }
-      end
-    end
-  end
-
   def destroy
     @bookmarked_article = current_user.bookmarked_articles.find(params[:id])
 
     respond_to do |format|
       if @bookmarked_article.destroy
-        format.html { redirect_to bookmarked_articles_path }
         format.js { render partial: "articles/article", locals: { article: @bookmarked_article.article } }
+        format.html { redirect_to :back }
       else
-        format.html { redirect_to bookmarked_articles_path, alert: "Unable to remove bookmark"}
         format.js { render text: "Unable to remove bookmark" }
+        format.html { redirect_to :back, alert: "Unable to remove bookmark"}
       end
     end
   end

@@ -11,7 +11,7 @@ class @BookmarkedArticles
 
     console.log($url)
 
-    $.ajax "#{$url}.js",
+    $.ajax "#{$url}",
       type: $link.data("method"),
       dataType: "text",
       success: (data) ->

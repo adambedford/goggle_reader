@@ -7,15 +7,9 @@ module ApplicationHelper
         content_tag(:i, "star", class: "material-icons")
       end
     else
-      bookmark_article_post_link(article)
-    end
-  end
-
-  def bookmark_article_post_link(article)
-    link_to bookmarked_articles_path(bookmarked_article: { article_id: article.id}, format: :js),
-            class: "bookmark-toggle-link",
-            method: :post do
-      content_tag(:i, "star_outline", class: "material-icons")
+      link_to bookmark_feed_article_path(article.feed, article), class: "bookmark-toggle-link" do
+        content_tag(:i, "star_outline", class: "material-icons")
+      end
     end
   end
 
