@@ -3,11 +3,11 @@ module ApplicationHelper
     bookmark = article.user_bookmarks.for_user(current_user).first
 
     if article.bookmarked_by_user?(current_user)
-      link_to bookmark, method: :delete, class: "bookmark-toggle-link" do
+      link_to bookmark, method: :delete, class: "bookmark-toggle-link tooltipped", data: { tooltip: "Remove Bookmark" } do
         content_tag(:i, "star", class: "material-icons")
       end
     else
-      link_to bookmark_feed_article_path(article.feed, article), class: "bookmark-toggle-link" do
+      link_to bookmark_feed_article_path(article.feed, article), class: "bookmark-toggle-link tooltipped", data: { tooltip: "Add Bookmark" } do
         content_tag(:i, "star_outline", class: "material-icons")
       end
     end
