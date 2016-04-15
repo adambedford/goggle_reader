@@ -1,4 +1,6 @@
 class FeedsController < ApplicationController
+  before_action :find_feed, only: [:show, :refresh, :unsubscribe]
+
   def new
     @feed = Feed.new
     @feed.users.push(current_user)
@@ -20,19 +22,26 @@ class FeedsController < ApplicationController
   end
 
   def show
-    @feed = current_user.feeds.find(params[:id])
   end
 
   def refresh
-    @feed = current_user.feeds.find(params[:id])
     @feed.refresh!
 
     redirect_to @feed
+  end
+
+  def unsubscribe
+    @feed.unsubscribe_user(current_user)
+    redirect_to :back, notice: "Unsubscribed from #{@feed.name}"
   end
 
   protected
 
   def feed_params
     params.require(:feed).permit(:url)
+  end
+
+  def find_feed
+    @feed = current_user.feeds.find(params[:id])
   end
 end

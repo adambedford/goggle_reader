@@ -12,6 +12,7 @@ Rails.application.routes.draw do
 
     member do
       get :refresh
+      get :unsubscribe
     end
   end
 

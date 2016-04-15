@@ -136,4 +136,49 @@ describe FeedsController, type: :controller, vcr: VCR_OPTIONS do
       }.to raise_error(ActiveRecord::RecordNotFound)
     end
   end
+
+  describe "GET unsubscribe" do
+    def do_request(options = {})
+      get(:unsubscribe, options)
+    end
+
+    before do
+      sign_in(bob)
+      request.env["HTTP_REFERER"] = root_path
+    end
+
+    context "when successful" do
+      before(:each) do
+        FeedSubscription.delete_all
+        create(:feed_subscription, user: bob, feed: feed_for_bob)
+      end
+
+      it "removes the subscription for the user" do
+        expect { do_request(id: feed_for_bob) }.to change { FeedSubscription.count }.by(-1)
+      end
+
+      it "redirects back" do
+        do_request(id: feed_for_bob)
+        expect(response).to redirect_to root_path
+      end
+
+      it "sets a success flash message" do
+        do_request(id: feed_for_bob)
+        expect(controller).to set_flash[:notice].to "Unsubscribed from #{feed_for_bob.name}"
+      end
+    end
+
+    context "when not successful" do
+      before(:each) do
+        FeedSubscription.delete_all
+      end
+
+      it "raises a Not Found" do
+        expect {
+          do_request(id: feed_for_bob.id)
+        }.to raise_error(ActiveRecord::RecordNotFound)
+      end
+    end
+
+  end
 end
