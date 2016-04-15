@@ -43,7 +43,6 @@ Articles are fetched and parsed using [FeedJira](http://feedjira.com/). This lib
 
 
 # Roadmap
-* Scheduled job to remove articles older than 7 days
 * Pagination on the Articles index page
 * Implement a Feed search using the Feedly API to create feed by name rather than URL
 * Add "Refresh All" button to Articles index to refresh all feeds
