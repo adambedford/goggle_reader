@@ -1,1 +1,8 @@
-= link_to "Sign in with Google", "/auth/google"
+.container
+  .row.login-container
+    .center-align
+      %h2 Goggle Reader
+
+      = link_to "/auth/google", class: "btn waves-effect waves-light" do
+        %i.material-icons.left perm_identity
+        Sign in with Google
