@@ -60,12 +60,6 @@ describe ArticlesController, type: :controller do
       it "redirects to the feed path" do
         expect(response).to redirect_to article.feed
       end
-
-      context "when successful" do
-        it "has a success flash message" do
-          expect(controller).to set_flash[:notice].to "Article bookmarked"
-        end
-      end
     end
   end
 end

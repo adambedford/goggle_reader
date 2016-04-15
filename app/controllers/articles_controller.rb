@@ -9,7 +9,7 @@ class ArticlesController < ApplicationController
     respond_to do |format|
       if (@bookmarked_article = @article.bookmark_for_user(current_user))
         format.js { render partial: "articles/article", locals: { article: @article } }
-        format.html { redirect_to :back, notice: "Article bookmarked" }
+        format.html { redirect_to :back }
       else
         format.js { render text: "Unable to bookmark article" }
         format.html { redirect_to :back, alert: "Unable to bookmark article" }
