@@ -46,10 +46,10 @@ describe SessionsController, type: :controller do
       expect(session[:user_id]).to be_nil
     end
 
-    it "should redirect to the root path with a notice" do
+    it "should redirect to the root path" do
       do_request
       expect(response).to redirect_to root_path
-      expect(controller).to set_flash[:notice]
+      expect(controller).to
     end
   end
 end
