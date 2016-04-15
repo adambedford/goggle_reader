@@ -1,7 +1,7 @@
 .row
   .section
     .row.center-align
-      = link_to "Add Feed", new_feed_path, class: "btn waves-effect waves-light col l12"
+      = link_to "Add Feed", "#add-feed-modal", class: "btn waves-effect waves-light col l12 modal-trigger"
 
   - if current_user.feeds.any?
     .section
