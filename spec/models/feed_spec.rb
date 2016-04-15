@@ -92,4 +92,15 @@ describe Feed, type: :model do
       expect { subject.refresh_later! }.to enqueue_a(RefreshFeedJob).with(global_id(subject))
     end
   end
+
+  describe "#unsubscribe_user" do
+    let(:user) { create(:user) }
+    let!(:subscription) { create(:feed_subscription, user: user, feed: subject) }
+
+    it "deletes the feed subscription for the given user" do
+      expect(subject.users).to include(user)
+      subject.unsubscribe_user(user)
+      expect(subject.users).to_not include(user)
+    end
+  end
 end

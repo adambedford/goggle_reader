@@ -29,6 +29,13 @@ class Feed < ActiveRecord::Base
     RefreshFeedJob.perform_later(self)
   end
 
+  def unsubscribe_user(user)
+    subscription = feed_subscriptions.where(user: user).first
+    return unless subscription
+
+    subscription.destroy
+  end
+
   protected
 
   def fetch_feed_and_load_title
