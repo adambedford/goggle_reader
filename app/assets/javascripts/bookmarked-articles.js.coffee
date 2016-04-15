@@ -9,8 +9,6 @@ class @BookmarkedArticles
     $url = $link.attr("href")
     $icon = $link.find("i")
 
-    console.log($url)
-
     $.ajax "#{$url}",
       type: $link.data("method"),
       dataType: "text",
@@ -19,7 +17,6 @@ class @BookmarkedArticles
       error: (data) ->
         debugger;
         Materialize.toast(data)
-
     return false
 
 $ ->
