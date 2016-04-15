@@ -1,5 +1,11 @@
 - content_for(:side_panel) do
   = render 'feeds/list'
 
-.cards-container
-  = render partial: 'article', collection: @articles
+- if @articles.present?
+  .cards-container
+    = render partial: 'article', collection: @articles
+
+- else
+  .card-panel
+    %h4 No News is Bad News
+    %p Subscribe to some news feeds to see articles here
