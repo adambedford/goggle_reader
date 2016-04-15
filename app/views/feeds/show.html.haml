@@ -4,7 +4,10 @@
 %h4= @feed.name
 
 %span.right
-  = link_to "Refresh", refresh_feed_path, class: "btn waves-effect waves-light"
+  = link_to refresh_feed_path, class: "btn waves-effect waves-light tooltipped", data: { tooltip: "Refresh" } do
+    %i.material-icons refresh
+  = link_to @feed, method: :delete, class: "btn waves-effect waves-light tooltipped", data: { tooltip: "Unsubscribe" } do
+    %i.material-icons delete
 
 .clearfix
 
