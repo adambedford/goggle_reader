@@ -6,7 +6,7 @@
 %span.right
   = link_to refresh_feed_path, class: "btn waves-effect waves-light tooltipped", data: { tooltip: "Refresh" } do
     %i.material-icons refresh
-  = link_to @feed, method: :delete, class: "btn waves-effect waves-light tooltipped", data: { tooltip: "Unsubscribe" } do
+  = link_to unsubscribe_feed_path(@feed), method: :delete, class: "btn waves-effect waves-light tooltipped", data: { tooltip: "Unsubscribe" } do
     %i.material-icons delete
 
 .clearfix

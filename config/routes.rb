@@ -12,7 +12,7 @@ Rails.application.routes.draw do
 
     member do
       get :refresh
-      get :unsubscribe
+      delete :unsubscribe
     end
   end
 

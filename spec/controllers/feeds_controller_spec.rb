@@ -137,9 +137,9 @@ describe FeedsController, type: :controller, vcr: VCR_OPTIONS do
     end
   end
 
-  describe "GET unsubscribe" do
+  describe "DELETE unsubscribe" do
     def do_request(options = {})
-      get(:unsubscribe, options)
+      delete(:unsubscribe, options)
     end
 
     before do
