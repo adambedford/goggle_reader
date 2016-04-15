@@ -36,7 +36,6 @@ Articles are fetched and parsed using [FeedJira](http://feedjira.com/). This lib
 * Omniauth
 * Feedjira (open source feed parser)
 * Haml templating
-* Puma
 * Sidekiq (background job processing)
 * Simple Form (form builder)
 * Puma (web server)
