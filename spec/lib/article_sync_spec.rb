@@ -32,7 +32,7 @@ describe ArticleSync, vcr: VCR_OPTIONS do
     context "when the article is new" do
       it "creates a new article" do
         expect { sync.sync }.to change { Article.count }
-        expect(Article.last.external_id).to eq entry.id
+        expect(Article.unscoped.last.external_id).to eq entry.id
       end
     end
 

@@ -6,7 +6,8 @@ VCR.configure do |c|
   c.hook_into :webmock
   c.default_cassette_options = {
     record: :new_episodes,
-    re_record_interval: 1.week
+    allow_playback_repeats: true
   }
   c.configure_rspec_metadata!
+
 end
