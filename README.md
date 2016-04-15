@@ -6,7 +6,7 @@
 # [Goggle Reader](https://goggle-reader.herokuapp.com)
 
 Goggle Reader is an RSS and Atom feed reader designed to replace Google Reader.
-``
+
 Users can sign in with their existing Google account and immediately begin adding feeds.
 
 Articles can be filtered by feed, and can also be bookmarked for later reading.
