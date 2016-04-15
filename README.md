@@ -1,7 +1,12 @@
-# Goggle Reader
+#####Circle CI Build Status
+[![Circle CI](https://circleci.com/gh/adambedford/goggle_reader.svg?style=svg)](https://circleci.com/gh/adambedford/goggle_reader)
+
+---
+
+# [Goggle Reader](https://goggle-reader.herokuapp.com)
 
 Goggle Reader is an RSS and Atom feed reader designed to replace Google Reader.
-
+``
 Users can sign in with their existing Google account and immediately begin adding feeds.
 
 Articles can be filtered by feed, and can also be bookmarked for later reading.
@@ -19,6 +24,8 @@ Users and Feeds are associated through Feed Subscriptions, and Users can associa
 When a User enters a URL, a Feed will either be created or an existing feed will be located with the URL. In both circumstances, a `FeedSubscription` is created. This approach is preferred to creating new `Feed` records for each user as it is quite probable that multiple users will subscribe to the same feed.
 
 Periodically (every 5 minutes), a web request takes place for each Feed to update it's Articles. These requests happen asynchronously and are queued and performed using Sidekiq.
+
+Articles are fetched and parsed using [FeedJira](http://feedjira.com/). This library is preferred to Ruby's `RSS::Parser` as it provides flexibility to handle both RSS and Atom feeds.
 
 
 ### Technology Used
