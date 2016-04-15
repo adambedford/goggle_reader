@@ -49,7 +49,7 @@ describe SessionsController, type: :controller do
     it "should redirect to the root path" do
       do_request
       expect(response).to redirect_to root_path
-      expect(controller).to
+      expect(controller)
     end
   end
 end
