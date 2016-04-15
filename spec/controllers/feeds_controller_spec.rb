@@ -61,12 +61,12 @@ describe FeedsController, type: :controller, vcr: VCR_OPTIONS do
         end
       end
 
+      before(:each) do
+        FeedSubscription.delete_all
+      end
+
       context "when the feed already exists" do
         let(:feed) { create(:feed) }
-
-        before(:each) do
-          FeedSubscription.delete_all
-        end
 
         it "doesn't create a new feed" do
           expect { do_request }.to_not change { Feed.count }
