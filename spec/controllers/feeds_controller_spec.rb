@@ -144,7 +144,6 @@ describe FeedsController, type: :controller, vcr: VCR_OPTIONS do
 
     before do
       sign_in(bob)
-      request.env["HTTP_REFERER"] = root_path
     end
 
     context "when successful" do
@@ -157,7 +156,7 @@ describe FeedsController, type: :controller, vcr: VCR_OPTIONS do
         expect { do_request(id: feed_for_bob) }.to change { FeedSubscription.count }.by(-1)
       end
 
-      it "redirects back" do
+      it "redirects to the root path" do
         do_request(id: feed_for_bob)
         expect(response).to redirect_to root_path
       end

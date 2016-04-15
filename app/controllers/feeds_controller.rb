@@ -32,7 +32,7 @@ class FeedsController < ApplicationController
 
   def unsubscribe
     @feed.unsubscribe_user(current_user)
-    redirect_to :back, notice: "Unsubscribed from #{@feed.name}"
+    redirect_to root_path, notice: "Unsubscribed from #{@feed.name}"
   end
 
   protected
